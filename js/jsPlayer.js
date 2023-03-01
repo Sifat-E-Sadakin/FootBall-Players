@@ -1,9 +1,9 @@
 console.log('connected');
 
-function searchPlayers(name){
+function searchPlayers(name, limit){
     fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${name}`)
 .then( res => res.json())
-.then( players => showPlayers(players.player) );
+.then( players => showPlayers(players.player, limit) );
 
 }
 
@@ -13,17 +13,17 @@ function searchPlayers(name){
 document.getElementById('btn').addEventListener('click', function(){
       sp(true);
       let input = document.getElementById('inp').value;
-      searchPlayers(input);
+      searchPlayers(input, 10);
 
 
 
 
 })
 
-function showPlayers(players){
-    console.log('players', players);
+function showPlayers(players, limit){
+    console.log('players', players.length);
 
-    if(players== null){
+    if(players== null ){
         alert('No player Found. Try again')
         sp(false);
     }
@@ -34,6 +34,20 @@ function showPlayers(players){
     if(players==null){
         let notFound= document.getElementById('notFound');
         notFound.classList.add('hidden');
+    }
+
+    if(players.length>limit){
+        // alert(console.log("snsun"))
+
+        players = players.slice(0,10);
+        
+        let allButton = document.getElementById('btn-all');
+        allButton.classList.remove('hidden');
+    }
+    else{
+        let allButton = document.getElementById('btn-all');
+        allButton.classList.add('hidden');
+
     }
 
     list.innerHTML =``;
@@ -124,3 +138,10 @@ function playerDetails(id){
 
     }
  }
+
+ document.getElementById('btn-all').addEventListener('click', function(){
+    sp(true);
+    let input = document.getElementById('inp').value;
+    searchPlayers(input);
+
+ })
