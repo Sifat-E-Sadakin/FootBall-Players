@@ -45,11 +45,11 @@ function showPlayers(players){
         div.innerHTML = `
 
         <div class="card lg:card-side bg-base-100 bg-slate-50 shadow-xl">
-            <figure><img src="${player.strCutout}" alt="Album"/></figure>
+            <figure><img src="${player.strCutout? player.strCutout:'./Pictures/download_500x500.png'}"  alt="Album"/></figure>
             <div class="card-body">
               <h2 class="card-title">${player.strPlayer}</h2>
               <p>${player.strBirthLocation}</p>
-              <label for="my-modal-6" onclick="playerDetails('${player.idPlayer}')" class="btn">open modal</label>
+              <label for="my-modal-6" onclick="playerDetails('${player.idPlayer}')" class="btn">View Details</label>
               
         </div>
         
@@ -91,7 +91,7 @@ function playerDetails(id){
                            <p id="age" class="py-1 text-black">Club: ${players[0].strTeam} </p>
                            <p id="age" class="py-1 text-black">Position: ${players[0].strPosition} </p>
                            <p id="age" class="py-1 text-black"> ${players[0].strDescriptionEN} </p>
-                           <img src="${players[0].strThumb}" alt="Album"/
+                           <img src="${players[0].strThumb}? " alt=""/
                            
                            <div class="modal-action">
                            <label for="my-modal-6" class="btn">Yay!</label>
