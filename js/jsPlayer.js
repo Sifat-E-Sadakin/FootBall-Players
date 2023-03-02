@@ -14,14 +14,22 @@ document.getElementById('btn').addEventListener('click', function(){
       sp(true);
       let input = document.getElementById('inp').value;
       searchPlayers(input, 10);
-
-
-
-
 })
 
+document.getElementById('inp').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        sp(true);
+      let input = document.getElementById('inp').value;
+      searchPlayers(input, 10);
+        
+    //   // Enter key pressed
+    //   console.log('Enter key pressed!');
+    }
+  })
+
+
 function showPlayers(players, limit){
-    console.log('players', players.length);
+    // console.log('players', players.length);
 
     if(players== null ){
         alert('No player Found. Try again')
@@ -54,6 +62,10 @@ function showPlayers(players, limit){
     for (const player of players ) {
 
         console.log(player );
+
+        // if( player.strTeam  == club){
+            
+        // }
 
         let div = document.createElement('div');
         div.innerHTML = `
@@ -145,3 +157,83 @@ function playerDetails(id){
     searchPlayers(input);
 
  })
+
+ //Fcb
+ document.getElementById('btn-fcb').addEventListener('click', function(){
+    sp(true);
+    fetch(`https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=${name}`)
+    .then( res => res.json())
+    .then( players => showPlayersOfFcb(players.player) );
+
+
+    
+ })
+
+ function showPlayersOfFcb(players){
+    console.log('players', players.length);
+
+    if(players== null ){
+        alert('No player Found. Try again')
+        sp(false);
+    }
+    let list = document.getElementById('player list');
+    // list.classList.add=('flex');
+
+   console.log(players);
+    if(players==null){
+        let notFound= document.getElementById('notFound');
+        notFound.classList.add('hidden');
+    }
+
+    // if(players.length>limit){
+    //     // alert(console.log("snsun"))
+
+    //     players = players.slice(0,10);
+        
+    //     let allButton = document.getElementById('btn-all');
+    //     allButton.classList.remove('hidden');
+    // }
+    // else{
+    //     let allButton = document.getElementById('btn-all');
+    //     allButton.classList.add('hidden');
+
+    // }
+
+    list.innerHTML =``;
+    for (const player of players ) {
+
+        console.log(player );
+
+        if( player.strTeam  == 'Barcelona'){
+             let div = document.createElement('div');
+        div.innerHTML = `
+
+        <div class="card lg:card-side bg-base-100 bg-slate-50 shadow-xl">
+            <figure><img src="${player.strCutout? player.strCutout:'./Pictures/download_500x500.png'}"  alt="Album"/></figure>
+            <div class="card-body">
+              <h2 class="card-title">${player.strPlayer}</h2>
+              <p>${player.strBirthLocation}</p>
+              <label for="my-modal-6" onclick="playerDetails('${player.idPlayer}')" class="btn">View Details</label>
+              
+        </div>
+        
+        
+                    
+       
+        
+        
+        `;
+        list.appendChild(div);
+            
+        }
+
+       
+
+        
+      
+        
+    }
+    sp(false);
+
+
+ }
