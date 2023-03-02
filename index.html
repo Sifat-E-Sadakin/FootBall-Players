@@ -8,17 +8,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css" />
 </head>
-<body class="bg-white container mx-auto">
-    <header class="text-center p-5" >
-        <h1 class="text-5xl"> List of Player</h1>
+<body class="bg-white">
+    <header class="text-center p-5 bg-cover bg-center bg-gradient-to-r from-purple-500 to-pink-500 " style="background-image: url(/Pictures/BG.jpg);" >
+       
+        <section class=" text-center py-60">
+          <h1 class="text-5xl pb-5  text-yellow-300"> List of Player</h1>
+          <input id="inp" class="bg-slate-200" type="text" placeholder="Messi" required>
+          <button id="btn" class="bg-black p-2 rounded text-white hover:bg-white hover:text-black" > search</button>
+          <button id="btn-fcb" class="bg-black p-2 rounded text-white hover:bg-white hover:text-black" > Player of FcBarcelona</button>
+          
+  
+      </section>
+      <button id="sp" class="btn loading bg-black text-white relative bottom-40 hidden">loading</button>
         
     </header>
-    <section class="text-center p-5">
-        <input id="inp" class="bg-slate-200" type="text" placeholder="Messi" required>
-        <button id="btn" class="bg-slate-600 p-2 rounded text-white" > search</button>
-        <button id="btn-fcb" class="bg-slate-600 p-2 rounded text-white" > Player of FcBarcelona</button>
-
-    </section>
+   
     <section id="sp" class="hidden">
       <div class="flex items-center justify-center">
         <div
